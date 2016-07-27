@@ -1,4 +1,5 @@
 function cropped_im = get_cropped_image_extended(imfile, row_num, col_num, radii, centers)
+%v.o2 the output is not the BW image, is the cleaned image
 %This function read a bit into the bar code to detect if there is some sort
 %of information
 I = imread(imfile);
@@ -12,9 +13,7 @@ level = graythresh(Iclean);
 BW = im2bw(Iclean,0.6);
 %prime_base_center = 796;
 %prime_base_center = 840; %roll 4
-prime_base_center = 801; %roll 5
-prime_base_center = 847; %roll 5
-prime_base_center = 870; %roll 5
+prime_base_center = 858;
 
 %right_cent_edge = 759;
 %right_cent_edge = 770; %roll 4
@@ -22,6 +21,8 @@ right_cent_edge = 780; %roll 5
 right_cent_edge = 769; %roll 5
 right_cent_edge = 773; %roll 5
 left_cent_edge = 3213;
+left_cent_edge = 3171;
+
 %%
 
 if length(radii) < 2
@@ -88,5 +89,5 @@ end
 % width_box = end_x - origin_x;
 % cropped_im = imcrop(BW, [origin_x, origin_y, width_box, height_box]);
 cropped_im = imcrop(Iclean, [upper_x_corner, upper_y_corner, width, height]);
-cropped_im = im2bw(cropped_im, 0.50); %this is for roll 4
+%cropped_im = im2bw(cropped_im, 0.45); %this is for roll 4 
 %cropped_im = im2bw(cropped_im, 0.55);

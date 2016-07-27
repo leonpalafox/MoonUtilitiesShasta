@@ -8,10 +8,10 @@ contrastAdjusted = imadjust(gather(J));
 marker = imerode(contrastAdjusted, strel('line',10,0));
 Iclean = imreconstruct(marker, contrastAdjusted);
 level = graythresh(Iclean);
-BW = im2bw(Iclean,0.45);
+BW = im2bw(Iclean,0.5);
 %%
 %[centers, radii, metric] = imfindcircles(Iclean,[20 50],'ObjectPolarity','dark', 'Sensitivity', 0.6);
-[centers, radii, metric] = imfindcircles(BW,[30 70],'ObjectPolarity','dark', 'Sensitivity', 0.7);
+[centers, radii, metric] = imfindcircles(BW,[50 70],'ObjectPolarity','dark', 'Sensitivity', 0.8);
 if length(radii) < 2
     %there is only one circle
     %check if it is the right circle or the left circle
@@ -22,11 +22,7 @@ if length(radii) < 2
         %so we use the same as when we have two
         cent_edge = 1439; %distance from cicrle to left edge of cropping area
         %base to center of circle
-        base_center = 881;%distance from cicrle to top edge (same for both circles)
-        base_center = 911; %roll 4
-        base_center = 885;
-        base_center = 909; %roll 5
-        base_center = 952;
+        base_center = 922;
         x_ts = centers(1,1) - cent_edge;
         y_tx = centers(1,2) - base_center;
         
@@ -34,12 +30,10 @@ if length(radii) < 2
         disp 'You only have the left dot'
         %so we use the same as when we have two
         cent_edge = 3972-1439; %distance from cicrle to left edge of cropping area
+        cent_edge = 2516;
         %base to center of circle
-        base_center = 881;%distance from cicrle to top edge (same for both circles)
-        base_center = 911; %roll 4
-        base_center = 885; %roll 5
-        base_center = 909; %roll 5
-        base_center = 952;
+        base_center = 922;%distance from cicrle to top edge (same for both circles)
+        
         
         x_ts = centers(1,1) + cent_edge;
         y_tx = centers(1,2)-base_center;
@@ -50,12 +44,7 @@ elseif length(radii)==2
     [right_center, index_right] = max(centers(:,1));
     cent_edge = 1439;
     %base to center of circle
-    base_center = 881;
-    base_center = 911; %roll 4
-    base_center = 885;
-    base_center = 909;
-    base_center = 952;
-    
+    base_center = 922;
     x_ts = centers(index_right,1) - cent_edge;
     y_tx = centers(index_right,2) - base_center;
     
