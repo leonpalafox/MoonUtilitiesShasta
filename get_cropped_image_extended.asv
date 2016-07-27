@@ -13,7 +13,7 @@ level = graythresh(Iclean);
 BW = im2bw(Iclean,0.6);
 %prime_base_center = 796;
 %prime_base_center = 840; %roll 4
-prime_base_center = 853;
+prime_base_center = 858;
 
 %right_cent_edge = 759;
 %right_cent_edge = 770; %roll 4
